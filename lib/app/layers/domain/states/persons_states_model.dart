@@ -1,20 +1,20 @@
 import '../models/person_model.dart';
 
-abstract class PersonsState {}
+abstract class ListMoviesState {}
 
-class FilmSuccessState implements PersonsState {
-  final List<PersonModel> data;
+class ListMoviesSuccessState implements ListMoviesState {
+  final List<MovieModel> data;
 
-  FilmSuccessState(this.data);
+  ListMoviesSuccessState(this.data);
 }
 
-class PersonsErrorState implements PersonsState {
+class ListMoviesErrorState implements ListMoviesState {
   final String errorMessage;
   final Object? error;
 
-  PersonsErrorState(this.errorMessage, this.error);
+  ListMoviesErrorState(this.errorMessage, this.error);
 }
 
-class PersonInitialState implements PersonsState {}
+class ListMoviesInitialState implements ListMoviesState {}
 
-class PersonLoadingState implements PersonsState {}
+class PersonLoadingState implements ListMoviesState {}

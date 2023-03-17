@@ -1,11 +1,9 @@
-import '../app/layers/data/datasources/api/swapi_api_datasource.dart';
-import '../app/layers/domain/models/person_model.dart';
-import '../app/layers/domain/states/persons_states_model.dart';
+import 'package:movie_challenge_flutter/app/layers/data/datasources/api/tmdb_api_datasource.dart';
 
-class PersonsRepository {
-  final SwapiApiDatasource _apiDatasource;
+class MoviesRepository {
+  final MoviesApiDatasource _apiDatasource;
 
-  PersonsRepository(this._apiDatasource);
+  MoviesRepository(this._apiDatasource);
 
   /// Obtem os dez primeiros personagens Starwars.
   /// Caso sucesso, retorna um PersonSuccessState com a lista.

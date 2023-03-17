@@ -7,11 +7,12 @@ GetIt inject = GetIt.I;
 
 initInject() {
 // datasources
-  inject.registerLazySingleton<TMDBApiDatasource>(() => TMDBApiDatasource());
+  inject
+      .registerLazySingleton<MoviesApiDatasource>(() => MoviesApiDatasource());
 
 //repositories
-  inject.registerLazySingleton<PersonsRepository>(
-      () => PersonsRepository(inject()));
+  inject.registerLazySingleton<MoviesRepository>(
+      () => MoviesRepository(inject()));
 
 // controllers
   inject.registerLazySingleton<PersonsController>(
