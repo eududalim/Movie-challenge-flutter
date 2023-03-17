@@ -3,9 +3,10 @@ import 'package:movie_challenge_flutter/app/layers/data/datasources/api/tmdb_api
 import 'package:movie_challenge_flutter/app/layers/domain/models/result_api_model.dart';
 
 void main() {
-  test('tmdb api datasource: should to get a ResultApiModel without error',
+  test(
+      'tmdb api datasource: getDetailsMovie should to get a ResultApiModel without error',
       () async {
-    final api = TMDBApiDatasource();
+    final api = MoviesApiDatasource();
 
     var result = await api.getDetailsMovie();
 
@@ -14,5 +15,15 @@ void main() {
     expect(result, isA<ResultApiModel>());
     expect(result, isNotNull);
     expect(result.error, isNull);
+  });
+
+  test(
+      'tmdb api datasource: getMoviesSearch should to get a ResultApiModel with list of maps with',
+      () async {
+    final api = MoviesApiDatasource();
+
+    var result2 = await api.getMoviesSearch('Lord of the Rings');
+
+    print(result2);
   });
 }
