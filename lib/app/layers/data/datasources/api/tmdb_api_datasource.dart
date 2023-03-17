@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../../../../shared/helpers/consts.dart';
 import '../../../domain/models/result_api_model.dart';
 
-class TMDBApiDatasource {
+class MoviesApiDatasource {
   final _dio = Dio(BaseOptions(baseUrl: Api.baseUrl, headers: _headers));
 
   /// Get the movie details (info in Api const).
@@ -46,7 +46,8 @@ class TMDBApiDatasource {
         var data = Map<String, dynamic>.from((response.data));
 
         if (response.statusCode == 200) {
-          var results = ResultApiModel(Map<String, dynamic>.from(data));
+          var results =
+              ResultApiModel(List<Map<String, dynamic>>.from(data['results']));
 
           return results;
         } else {
