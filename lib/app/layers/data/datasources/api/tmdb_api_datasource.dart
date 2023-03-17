@@ -9,10 +9,9 @@ import '../../../domain/models/result_api_model.dart';
 class TMDBApiDatasource {
   final _dio = Dio(BaseOptions(baseUrl: Api.baseUrl, headers: _headers));
 
-  /// Obtem os dez primeiros personagens Starwars.
-  /// Caso sucesso, retorna um ResultApiModel com a lista no 'object'.
-  /// Caso dê erro, retorna um ResultApiModel com
-  /// o 'object' null e a mensagem de erro em 'error'.
+  /// Get the movie details (info in Api const).
+  /// if success, return a ResultApiModel with list in 'object'.
+  /// if error, return a ResultApiModel with the 'object' null and error message in 'error'.
   Future<ResultApiModel> getDetailsMovie() async {
     try {
       var response = await _dio.get(Api.pathDetailsMovie);
@@ -20,13 +19,39 @@ class TMDBApiDatasource {
         var data = Map<String, dynamic>.from((response.data));
 
         if (response.statusCode == 200) {
-          var results =
-              ResultApiModel(List<Map<String, dynamic>>.from(data['results']));
+          var results = ResultApiModel(Map<String, dynamic>.from(data));
 
           return results;
         } else {
           debugPrint(response.statusCode.toString());
-          return ResultApiModel(null, error: data['message'].toString());
+          return ResultApiModel(null, error: data['status_message'].toString());
+        }
+      } on Exception catch (e) {
+        debugPrint(e.toString());
+        return ResultApiModel(null, error: e.toString());
+      }
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return ResultApiModel(null, error: e.toString());
+    }
+  }
+
+  /// Search and get the movies referring of query.
+  /// if success, return a ResultApiModel with list in 'object'.
+  /// if error, return a ResultApiModel with the 'object' null and error message in 'error'.
+  Future<ResultApiModel> getMoviesSearch(String query) async {
+    try {
+      var response = await _dio.get(Api.pathSearchMovie(query));
+      try {
+        var data = Map<String, dynamic>.from((response.data));
+
+        if (response.statusCode == 200) {
+          var results = ResultApiModel(Map<String, dynamic>.from(data));
+
+          return results;
+        } else {
+          debugPrint(response.statusCode.toString());
+          return ResultApiModel(null, error: data['status_message'].toString());
         }
       } on Exception catch (e) {
         debugPrint(e.toString());

@@ -6,9 +6,12 @@ abstract class Api {
   // my api key
   static const String _idFilmDetail = '120';
 
-  /// A People resource is an individual person or character within the Star Wars universe.
-  static const baseUrl = 'https://api.themoviedb.org/3/';
+  static const baseUrl = 'https://api.themoviedb.org/3';
+
+  // Get the movie details
+  static String pathDetailsMovie = '/movie/$_idFilmDetail';
 
   // get all the people resources
-  static String pathDetailsMovie = 'movie/$_idFilmDetail';
+  static String pathSearchMovie(String query) =>
+      '/search/movie?api_key=c47f0290da8021ded7b0adf2389f5239&query=$query&page=1&include_adult=false';
 }
