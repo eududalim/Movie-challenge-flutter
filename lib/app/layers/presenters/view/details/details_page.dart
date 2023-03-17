@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/dependency_injection/dependency_injection.dart';
-import '../../controllers/persons_controller.dart';
 import 'widgets/info_person_row_widget.dart';
 
 class DetailsPage extends StatefulWidget {
