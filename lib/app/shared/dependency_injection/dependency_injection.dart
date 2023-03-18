@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../layers/presenters/controllers/details_controller.dart';
 import '../../layers/data/repositories/movies_repository.dart';
@@ -18,4 +19,7 @@ initInject() {
 // controllers
   inject.registerLazySingleton<DetailsController>(
       () => DetailsController(inject()));
+
+  inject.registerFactoryAsync<SharedPreferences>(
+      () => SharedPreferences.getInstance());
 }

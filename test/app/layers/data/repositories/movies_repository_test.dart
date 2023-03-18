@@ -11,6 +11,7 @@ void main() {
     final result = await repository.getDetailsMovie();
 
     expect(result, isA<MoviesState>());
+    expect(result, isA<MoviesSuccessState>());
     assert(result is MoviesSuccessState);
   });
 

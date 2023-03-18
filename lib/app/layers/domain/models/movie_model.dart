@@ -49,9 +49,8 @@ class MovieModel {
 
     if (map['genres'] != null) {
       //     log(map['title']);
-      genres = (map['genres'] ?? [] as List<Map<String, dynamic>>)
-          .map((e) => e['name'].toString())
-          .toList();
+      genres =
+          (map['genres'] as List).map((e) => e['name'].toString()).toList();
     } else if (map['genre_ids'] != null) {
       //     log(map['title']);
       genres = (map['genre_ids'] as List)

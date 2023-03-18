@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       title: 'Movie Challenge Flutter',
       theme: DefaultTheme.dark,
       themeMode: ThemeMode.dark,
-      highContrastDarkTheme: DefaultTheme.contrast,
       debugShowCheckedModeBanner: false,
       initialRoute: DetailsPage.route,
       onGenerateRoute: (settings) {
