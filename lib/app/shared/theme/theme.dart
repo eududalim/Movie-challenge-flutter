@@ -11,21 +11,21 @@ class DefaultTheme {
         iconTheme: IconThemeData(color: Colors.grey[500]),
         textTheme: TextTheme(
           bodySmall: TextStyle(
-              color: Colors.grey[500],
+              color: Colors.grey[600],
               fontWeight: FontWeight.w300,
-              fontSize: 13),
+              fontSize: 14),
           bodyMedium: TextStyle(
             color: Colors.grey[400],
             fontWeight: FontWeight.w500,
           ),
           headlineSmall: TextStyle(
-              color: Colors.grey[100],
+              color: Colors.grey[200],
               fontWeight: FontWeight.w800,
               fontSize: 26),
           titleMedium: TextStyle(
-              color: Colors.grey[100],
-              fontWeight: FontWeight.w600,
-              fontSize: 16),
+              color: Colors.grey[200],
+              fontWeight: FontWeight.w500,
+              fontSize: 17),
         ),
         focusColor: themeYellow.withOpacity(0.3),
         splashColor: themeYellow.withOpacity(0.4),
