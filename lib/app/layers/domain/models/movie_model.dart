@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:movie_challenge_flutter/app/shared/helpers/genres_const.dart';
 

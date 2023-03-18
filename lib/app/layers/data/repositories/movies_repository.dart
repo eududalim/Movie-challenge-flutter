@@ -20,7 +20,7 @@ class MoviesRepository {
         return MoviesSuccessState([movie]);
       } else {
         if (result.error == null) {
-          return MoviesErrorState('Erro desconhecido', null);
+          return MoviesErrorState('Unknown error', null);
         } else {
           return MoviesErrorState(result.error!, null);
         }
@@ -42,12 +42,12 @@ class MoviesRepository {
             .map((e) => MovieModel.fromMap(e))
             .toList()
             // removal first of list, because is the movie main (details)
-            .sublist(1);
+            .sublist(1, 7);
 
         return MoviesSuccessState(list);
       } else {
         if (result.error == null) {
-          return MoviesErrorState('Erro desconhecido', null);
+          return MoviesErrorState('Unknown error', null);
         } else {
           return MoviesErrorState(result.error!, null);
         }
