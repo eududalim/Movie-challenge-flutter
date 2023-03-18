@@ -39,4 +39,11 @@ class DetailsController {
       instance.setBool(likeKey, click);
     });
   }
+
+  final listMoviesState = ValueNotifier<MoviesState>(MoviesInitialState());
+
+  loadListMovies() {
+    listMoviesState.value = MoviesLoadingState();
+    _repository.getListMovie().then((value) => listMoviesState.value = value);
+  }
 }

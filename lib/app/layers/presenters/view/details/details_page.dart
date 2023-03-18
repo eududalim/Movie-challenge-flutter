@@ -7,6 +7,8 @@ import 'package:movie_challenge_flutter/app/layers/presenters/view/common/progre
 import 'package:movie_challenge_flutter/app/shared/dependency_injection/dependency_injection.dart';
 import 'package:movie_challenge_flutter/app/shared/helpers/api_conts.dart';
 
+import 'widgets/error_widget_custom.dart';
+
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
   static const route = '/';
@@ -16,13 +18,14 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  final controller = inject.get<DetailsController>();
+
   @override
   void initState() {
     controller.loadDetailMovie();
+    controller.loadListMovies();
     super.initState();
   }
-
-  final controller = inject.get<DetailsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +49,6 @@ class _DetailsPageState extends State<DetailsPage> {
                   end: Alignment.bottomCenter,
                 ),
               ),
-              // decoration: BoxDecoration(boxShadow: [
-              //   BoxShadow(
-              //       color: Theme.of(context).scaffoldBackgroundColor,
-              //       offset: Offset.fromDirection(2),
-              //       blurRadius: 10)
-              // ]),
               child: ValueListenableBuilder(
                   valueListenable: controller.movieState,
                   builder: (context, state, _) {
@@ -67,26 +64,8 @@ class _DetailsPageState extends State<DetailsPage> {
                     }
                     if (state is MoviesErrorState) {
                       log(state.errorMessage);
-                      return Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              state.errorMessage,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            const Icon(
-                              Icons.error_outline,
-                              size: 35,
-                            ),
-                          ],
-                        ),
-                      ));
+                      return ErrorWidgetCustom(
+                          errorMessage: state.errorMessage);
                     }
 
                     return Container();
@@ -121,7 +100,69 @@ class _DetailsPageState extends State<DetailsPage> {
                     );
                   }),
             ),
-            //    ValueListenableBuilder(valueListenable: controller, builder: builder)
+            ValueListenableBuilder(
+              valueListenable: controller.listMoviesState,
+              builder: (context, state, child) {
+                if (state is MoviesLoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (state is MoviesSuccessState) {
+                  var list = state.data;
+                  return Column(
+                      children: list
+                          .map((movie) => Container(
+                                constraints:
+                                    const BoxConstraints(maxHeight: 110),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16),
+                                child: Row(
+                                  children: [
+                                    AspectRatio(
+                                      aspectRatio: 3 / 4,
+                                      child: Image.network(
+                                        Api.getUrlImage(movie.imgPath),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            movie.title,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            '${movie.yearRelease}  ${movie.listGenres.toString().replaceFirst('[', '').replaceAll(']', '')}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ))
+                          .toList());
+                }
+                if (state is MoviesErrorState) {
+                  log(state.errorMessage);
+                  return ErrorWidgetCustom(errorMessage: state.errorMessage);
+                }
+
+                return Container();
+              },
+            )
           ],
         ),
       ),
