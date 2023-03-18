@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../../shared/helpers/consts.dart';
+import '../../../../shared/helpers/api_conts.dart';
 import '../../../domain/models/result_api_model.dart';
 
 class MoviesApiDatasource {
@@ -39,7 +39,8 @@ class MoviesApiDatasource {
   /// Search and get the movies referring of query.
   /// if success, return a ResultApiModel with list in 'object'.
   /// if error, return a ResultApiModel with the 'object' null and error message in 'error'.
-  Future<ResultApiModel> getMoviesSearch(String query) async {
+  Future<ResultApiModel> getMoviesSearch(
+      {String query = 'Lord of the Rings'}) async {
     try {
       var response = await _dio.get(Api.pathSearchMovie(query));
       try {

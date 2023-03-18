@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_challenge_flutter/app/layers/data/datasources/api/tmdb_api_datasource.dart';
+import 'package:movie_challenge_flutter/app/layers/data/datasources/api/movies_api_datasource.dart';
 import 'package:movie_challenge_flutter/app/layers/domain/models/result_api_model.dart';
 
 void main() {
@@ -22,7 +22,7 @@ void main() {
       () async {
     final api = MoviesApiDatasource();
 
-    var result2 = await api.getMoviesSearch('Lord of the Rings');
+    var result2 = await api.getMoviesSearch(query: 'Lord of the Rings');
 
     print(result2);
   });

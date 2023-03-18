@@ -1,58 +1,59 @@
-import 'package:movie_challenge_flutter/app/layers/data/datasources/api/tmdb_api_datasource.dart';
+import 'package:movie_challenge_flutter/app/layers/data/datasources/api/movies_api_datasource.dart';
+import 'package:movie_challenge_flutter/app/layers/domain/models/movie_model.dart';
+import 'package:movie_challenge_flutter/app/layers/domain/states/list_movies_states_model.dart';
 
 class MoviesRepository {
   final MoviesApiDatasource _apiDatasource;
 
   MoviesRepository(this._apiDatasource);
 
-  /// Obtem os dez primeiros personagens Starwars.
-  /// Caso sucesso, retorna um PersonSuccessState com a lista.
-  /// Caso dê erro, retorna um PersonErrorState com
-  /// a mensagem de erro em 'errorMessage' e objeto do erro (se houver) em 'erro'.
-  Future<PersonsState> getAllPersons() async {
+  /// Get the movie details (info in Api const).
+  /// if success, return a MoviesSuccessState with MovieModel in list.
+  /// if error, return a MoviesErrorState with error message in 'errorMessage'
+  /// and error objeto (if there was) in 'error'.
+  Future<MoviesState> getDetailsMovie() async {
     try {
-      var result = await _apiDatasource.getAllPersons();
+      var result = await _apiDatasource.getDetailsMovie();
       if (result.error == null && result.object != null) {
-        var list = (result.object as List<Map<String, dynamic>>)
-            .map((e) => PersonModel.fromMap(e))
-            .toList();
+        var movie = MovieModel.fromMap(result.object);
 
-        return PersonsSuccessState(list);
+        return MoviesSuccessState([movie]);
       } else {
         if (result.error == null) {
-          return PersonsErrorState('Erro desconhecido', null);
+          return MoviesErrorState('Erro desconhecido', null);
         } else {
-          return PersonsErrorState(result.error!, null);
+          return MoviesErrorState(result.error!, null);
         }
       }
     } catch (e) {
-      return PersonsErrorState(e.toString(), e);
+      return MoviesErrorState(e.toString(), e);
     }
   }
 
-  /// Get the specie name using url passed by parameters
-  Future<String> getNameSpecie(String specieUrl) =>
-      _apiDatasource.getNameSpecie(specieUrl);
-
-  /// Get person filtered by film e return a PersonState with result
-  Future<PersonsState> getPersonsFilmFilter(String indexFilm) async {
+  /// Search and get the movies referring of movie main.
+  /// if success, return a MoviesSuccessState with MovieModel in list.
+  /// if error, return a MoviesErrorState with error message in 'errorMessage'
+  /// and error objeto (if there was) in 'error'.
+  Future<MoviesState> getListMovie() async {
     try {
-      var result = await _apiDatasource.getPersonsFilmFilter(indexFilm);
+      var result = await _apiDatasource.getMoviesSearch();
       if (result.error == null && result.object != null) {
         var list = (result.object as List<Map<String, dynamic>>)
-            .map((e) => PersonModel.fromMap(e))
-            .toList();
+            .map((e) => MovieModel.fromMap(e))
+            .toList()
+            // removal first of list, because is the movie main (details)
+            .sublist(1);
 
-        return PersonsSuccessState(list);
+        return MoviesSuccessState(list);
       } else {
         if (result.error == null) {
-          return PersonsErrorState('Erro desconhecido', null);
+          return MoviesErrorState('Erro desconhecido', null);
         } else {
-          return PersonsErrorState(result.error!, null);
+          return MoviesErrorState(result.error!, null);
         }
       }
     } catch (e) {
-      return PersonsErrorState(e.toString(), e);
+      return MoviesErrorState(e.toString(), e);
     }
   }
 }
