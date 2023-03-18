@@ -1,6 +1,7 @@
-import '../../layers/data/repositories/movies_repository.dart';
-import '../../layers/presenters/controllers/persons_controller.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../layers/presenters/controllers/details_controller.dart';
+import '../../layers/data/repositories/movies_repository.dart';
 import '../../layers/data/datasources/api/movies_api_datasource.dart';
 
 GetIt inject = GetIt.I;
@@ -15,6 +16,6 @@ initInject() {
       () => MoviesRepository(inject()));
 
 // controllers
-  inject.registerLazySingleton<PersonsController>(
-      () => PersonsController(inject()));
+  inject.registerLazySingleton<DetailsController>(
+      () => DetailsController(inject()));
 }
