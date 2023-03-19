@@ -42,7 +42,7 @@ class MoviesApiDatasource {
   Future<ResultApiModel> getMoviesSearch(
       {String query = 'Lord of the Rings'}) async {
     try {
-      var response = await _dio.get(Api.pathSearchMovie(query));
+      var response = await _dio.get(Api.pathSearchMovies(query));
       try {
         var data = Map<String, dynamic>.from((response.data));
 
