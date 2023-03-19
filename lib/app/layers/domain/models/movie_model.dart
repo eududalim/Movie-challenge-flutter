@@ -6,7 +6,7 @@ class MovieModel {
   String title;
   String imgPath;
   int likes;
-  int views;
+  double views;
   String yearRelease;
   List<String?> listGenres;
 
@@ -23,7 +23,7 @@ class MovieModel {
     String? title,
     String? imgPath,
     int? likes,
-    int? views,
+    double? views,
   }) {
     return MovieModel(
       title: title ?? this.title,
@@ -62,7 +62,7 @@ class MovieModel {
       title: map['title'] ?? '',
       imgPath: map['poster_path'] ?? '',
       likes: map['vote_count']?.toInt() ?? 0,
-      views: map['popularity']?.toInt() ?? 0,
+      views: map['popularity']?.toDouble() ?? 0,
       yearRelease: map['release_date'].toString().split('-')[0],
       listGenres: genres,
     );
