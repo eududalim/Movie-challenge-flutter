@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_challenge_flutter/app/layers/data/datasources/internal/internal_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../layers/presenters/controllers/details_controller.dart';
@@ -11,10 +12,11 @@ initInject() {
 // datasources
   inject
       .registerLazySingleton<MoviesApiDatasource>(() => MoviesApiDatasource());
+  inject.registerLazySingleton<InternalDatasource>(() => InternalDatasource());
 
 //repositories
   inject.registerLazySingleton<MoviesRepository>(
-      () => MoviesRepository(inject()));
+      () => MoviesRepository(inject(), inject()));
 
 // controllers
   inject.registerLazySingleton<DetailsController>(

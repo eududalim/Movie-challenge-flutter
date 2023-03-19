@@ -3,25 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart' show ValueNotifier;
 import '../../data/repositories/movies_repository.dart';
 import '../../domain/states/list_movies_states_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-const likeKey = 'likeMovie';
 
 class DetailsController {
   final MoviesRepository _repository;
 
   DetailsController(this._repository) {
-    SharedPreferences.getInstance().then((instance) {
-      try {
-        var result = instance.getBool(likeKey);
-
-        if (result != null) {
-          like.value = result;
-        }
-      } on Exception catch (e) {
-        log(e.toString());
-      }
-    });
+    like.value = _repository.getIsFavorite();
   }
   final movieState = ValueNotifier<MoviesState>(MoviesInitialState());
 
@@ -34,10 +21,7 @@ class DetailsController {
 
   setLike(bool click) {
     like.value = click;
-
-    SharedPreferences.getInstance().then((instance) {
-      instance.setBool(likeKey, click);
-    });
+    _repository.setLike(click);
   }
 
   final listMoviesState = ValueNotifier<MoviesState>(MoviesInitialState());

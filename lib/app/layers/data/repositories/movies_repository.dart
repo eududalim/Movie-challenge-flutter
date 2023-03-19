@@ -1,11 +1,13 @@
 import 'package:movie_challenge_flutter/app/layers/data/datasources/api/movies_api_datasource.dart';
+import 'package:movie_challenge_flutter/app/layers/data/datasources/internal/internal_datasource.dart';
 import 'package:movie_challenge_flutter/app/layers/domain/models/movie_model.dart';
 import 'package:movie_challenge_flutter/app/layers/domain/states/list_movies_states_model.dart';
 
 class MoviesRepository {
   final MoviesApiDatasource _apiDatasource;
+  final InternalDatasource _internalDatasource;
 
-  MoviesRepository(this._apiDatasource);
+  MoviesRepository(this._apiDatasource, this._internalDatasource);
 
   /// Get the movie details (info in Api const).
   /// if success, return a MoviesSuccessState with MovieModel in list.
@@ -16,6 +18,8 @@ class MoviesRepository {
       var result = await _apiDatasource.getDetailsMovie();
       if (result.error == null && result.object != null) {
         var movie = MovieModel.fromMap(result.object);
+
+        await loadInternalData();
 
         return MoviesSuccessState([movie]);
       } else {
@@ -56,4 +60,13 @@ class MoviesRepository {
       return MoviesErrorState(e.toString(), e);
     }
   }
+
+  /// get like state of movie selected in memory internal
+  bool getIsFavorite() => _internalDatasource.getIsFavorite();
+
+  /// save like state of movie selected
+  setLike(bool click) => _internalDatasource.setLike(click);
+
+// load internal data with favorite
+  Future<void> loadInternalData() => _internalDatasource.loadInstance();
 }
