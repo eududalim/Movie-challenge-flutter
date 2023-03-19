@@ -11,7 +11,7 @@ import 'package:movie_challenge_flutter/app/layers/presenters/view/details/widge
 import 'package:movie_challenge_flutter/app/shared/dependency_injection/dependency_injection.dart';
 import 'package:movie_challenge_flutter/app/shared/helpers/api_conts.dart';
 
-import 'widgets/error_widget_custom.dart';
+import '../common/error_widget_custom.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
