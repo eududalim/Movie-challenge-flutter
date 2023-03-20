@@ -26,7 +26,9 @@ Este projeto usa as seguintes dependências:
 
 <br>
 
-Como arquitetura do projeto foi aplicado o Clean Archicteture (de uma forma mais simplificada), devido ao tamanho do projeto, mas buscando um baixo acoplamento do código, com camadas definidas e classes objetivas, e conforme as boas práticas de desenvolvimento, facilitando reuso, testes, e manutenção. Para controle de estado foi utilizado uma opção nativa - o ValueNotifier -, sendo uma das melhores opções recomendadas atualmente pela comunidade, contribuindo para a performance, manutenção e legibilidade, sendo assim a opção esolhida para este projeto. Para injeção de dependencias foi usado uma dependencia - Get It -, que é simples e funciona muito bem.
+Como arquitetura do projeto foi aplicado o Clean Archicteture (de uma forma mais simplificada), devido ao tamanho do projeto, mas buscando um baixo acoplamento do código, com camadas definidas e classes objetivas, e conforme as boas práticas de desenvolvimento, facilitando reuso, testes, e manutenção. 
+
+Para controle de estado foi utilizado uma opção nativa - o ValueNotifier -, sendo uma das melhores opções recomendadas atualmente pela comunidade, contribuindo para a performance, manutenção e legibilidade, sendo assim a opção escolhida para este projeto. Para injeção de dependencias foi usado o Get It, que é simples e funciona muito bem. Alguns dos Design Patterns usados foi o State para um controle melhor de estado dos filmes, e o Observer para reatividade.
 
 <br>
 
@@ -59,7 +61,6 @@ Foram realizados testes unitários das camadas datasource, repository e controll
 
 <br>
 
- ###  **| Testes**
  
 Nos testes, uma das melhorias sugeridas é realizar tambem os testes de integração e de widgets, para ficar mais completo. Nos testes unitários já realizados, falta mapear os caminhos não-felizes, usando mocks. Para isso precisaria de um pouco mais de tempo para desenvolver, usando o mockito ou mocktail. Criando mocks para simular requisições falhas, usando as mais diversas possibilidades, e assim tratando-as.
 
