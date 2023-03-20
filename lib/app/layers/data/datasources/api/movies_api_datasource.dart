@@ -36,13 +36,12 @@ class MoviesApiDatasource {
     }
   }
 
-  /// Search and get the movies referring of query.
+  /// get the movies similiar.
   /// if success, return a ResultApiModel with list in 'object'.
   /// if error, return a ResultApiModel with the 'object' null and error message in 'error'.
-  Future<ResultApiModel> getMoviesSearch(
-      {String query = 'Lord of the Rings'}) async {
+  Future<ResultApiModel> getMoviesSimilar() async {
     try {
-      var response = await _dio.get(Api.pathSearchMovies(query));
+      var response = await _dio.get(Api.pathSimilarMovies());
       try {
         var data = Map<String, dynamic>.from((response.data));
 

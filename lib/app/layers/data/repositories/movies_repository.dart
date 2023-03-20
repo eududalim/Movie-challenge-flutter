@@ -34,19 +34,18 @@ class MoviesRepository {
     }
   }
 
-  /// Search and get the movies referring of movie main.
+  /// get the movies similiar of movie main.
   /// if success, return a MoviesSuccessState with MovieModel in list.
   /// if error, return a MoviesErrorState with error message in 'errorMessage'
   /// and error objeto (if there was) in 'error'.
   Future<MoviesState> getListMovie() async {
     try {
-      var result = await _apiDatasource.getMoviesSearch();
+      var result = await _apiDatasource.getMoviesSimilar();
       if (result.error == null && result.object != null) {
         var list = (result.object as List<Map<String, dynamic>>)
             .map((e) => MovieModel.fromMap(e))
             .toList()
-            // removal first of list, because is the movie main (details)
-            .sublist(1, 7);
+            .sublist(0, 7);
 
         return MoviesSuccessState(list);
       } else {

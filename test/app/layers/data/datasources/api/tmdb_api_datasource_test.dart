@@ -22,7 +22,7 @@ void main() {
       () async {
     final api = MoviesApiDatasource();
 
-    var result2 = await api.getMoviesSearch(query: 'Lord of the Rings');
+    var result2 = await api.getMoviesSimilar();
 
     print(result2);
   });
