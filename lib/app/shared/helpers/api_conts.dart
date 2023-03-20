@@ -12,8 +12,8 @@ abstract class Api {
   static String pathDetailsMovie = '/movie/$_idMovieDetail';
 
   // path to url for search similar movies
-  static String pathSearchMovies(String query) =>
-      '/search/movie?api_key=c47f0290da8021ded7b0adf2389f5239&query=$query&page=1&include_adult=false';
+  static String pathSimilarMovies([String movieId = _idMovieDetail]) =>
+      '/movie/$movieId/similar?api_key=c47f0290da8021ded7b0adf2389f5239&page=1';
 
   static String getUrlImage(String pathImage) =>
       'https://image.tmdb.org/t/p/w342$pathImage';
