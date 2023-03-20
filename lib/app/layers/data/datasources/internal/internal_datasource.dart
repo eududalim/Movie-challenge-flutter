@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const _likeKey = 'likeMovie';
 
 class InternalDatasource {
-  late SharedPreferences _shared;
+  SharedPreferences? _shared;
 
   get instanceShared => _shared;
 
@@ -17,7 +17,7 @@ class InternalDatasource {
   /// get like state of movie selected
   bool getIsFavorite() {
     try {
-      var result = _shared.getBool(_likeKey);
+      var result = _shared?.getBool(_likeKey);
 
       return result ?? false;
     } on Exception catch (e) {
@@ -27,5 +27,5 @@ class InternalDatasource {
   }
 
   /// save like state of movie selected
-  setLike(bool click) => _shared.setBool(_likeKey, click);
+  setLike(bool click) => _shared?.setBool(_likeKey, click);
 }

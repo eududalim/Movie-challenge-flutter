@@ -4,6 +4,10 @@ Este é um aplicativo mobile que exibe informações sobre um filme específico.
 
 <br>
 
+- [Acessar aplicação funcionando →](https://movie-challenge-flutter.web.app)
+
+<br>
+
 > API usada: https://developers.themoviedb.org/3/movies/get-movie-details
 
 <br>
@@ -42,7 +46,7 @@ Nesta tela, é exibido os detalhes referentes ao filme selecionado, conforme bus
 <img src="screenshots/img1.png"  width=300>
 
 
- A baixo das informações do filme principal é exibido uma lista com os filmes similares a ele. Para isso o app usou a função de pesquisa na API e faz uma busca usando algumas palavras do título do filme selecionado, e então é retornado uma lista contendo vários filmes referentes a pesquisa. O sistema remove o primeiro da lista (que é o filme já selecionado e que está sendo exibido os detalhes na tela), e diminui o tamanho da lista para 7.
+ A baixo das informações do filme principal é exibido uma lista com os filmes similares a ele. Para isso o app usou a função de pesquisa na API e faz uma busca usando algumas palavras do título do filme selecionado, e então é retornado uma lista contendo vários filmes referentes a pesquisa. O sistema remove o primeiro da lista (que é o filme já selecionado e que está sendo exibido os detalhes na tela), e diminui o tamanho da lista para seis.
 
 
 <br>
@@ -66,3 +70,12 @@ Nos testes, uma das melhorias sugeridas é realizar tambem os testes de integra�
 
 Nesse sentido, talvez fosse interessante criar repositories abstratos para facilitar estes testes, e inserindo-os no projeto, seguindo assim mais de perto o Clean Archtecture. Até o momento, o projeto foi desenvolvimento de forma mais simples, mas conforme o projeto fosse crescendo, essa mudança se faria necessária.
 
+
+<br>
+
+## **Acesse a aplicação agora**
+----
+
+<br>
+
+- [Acessar aplicação funcionando →](https://movie-challenge-flutter.web.app)
